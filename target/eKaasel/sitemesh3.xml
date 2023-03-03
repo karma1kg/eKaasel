@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sitemesh>
+
+  <mapping path="/*" decorator="/layout/open-layout.jsp"/>
+    <mapping path="/pmoLogin*" decorator="/layout/pmo.jsp"/>
+    <mapping path="/ministryLogin*" decorator="/layout/ministry-layout.jsp"/>
+    <mapping path="/pmLogin*" decorator="/layout/pm-layout.jsp"/>
+    <mapping path="/dept_login*" decorator="/layout/dept-layout.jsp"/>
+    <mapping path="/divLogin*" decorator="/layout/div-layout.jsp"/>
+    <!--<mapping path="/index*" decorator="/layout/user.jsp"/>-->
+    <!--
+     <mapping path="/pmoLogin*" decorator="/layout/pmo.jsp"/>
+     <mapping path="*/save" decorator="/layout/empty_layout.jsp"/>
+     <mapping path="/divLogin*" decorator="/layout/div-layout.jsp"/>-->
+ <!--   <mapping path="/pmLogin*" decorator="/layout/pm-layout.jsp"/>
+    <mapping path="/ministryLogin*" decorator="/layout/ministry-layout.jsp"/>
+    <mapping path="/divLogin*" decorator="/layout/div-layout.jsp"/>
+    <mapping path="/pmLogin*" decorator="/layout/pm-layout.jsp"/>
+    <mapping path="/dept_login*" decorator="/layout/dept-layout.jsp"/>-->
+    <!--For Approve-->
+  <!--  <mapping path="/approve*" decorator="/layout/approve-layout.jsp"></mapping>
+    <mapping path="/view*" decorator="/layout/view-layout.jsp"></mapping>-->
+    <mapping path="*/empty/*" decorator="/layout/empty_layout.jsp"/>
+</sitemesh>

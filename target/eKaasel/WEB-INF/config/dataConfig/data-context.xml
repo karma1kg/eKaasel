@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="emFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="default"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emFactory"/>
+    </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor">
+    </bean>
+
+    <!-- For MySql -->
+    <bean id="queryProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- MySql files properties-->
+                <value>classpath*:sqlQuery/publicDao.mysql.sql</value>
+                <!--<value>classpath*:sqlQuery/publicDao.mysql.sql</value>
+                <value>classpath*:sqlQuery/PassportDao.mysql.sql</value>
+                <value>classpath*:sqlQuery/ReportDao.mysql.sql</value>
+                 Properties Files
+                <value>classpath*:fileUpload/fileUpload.properties</value>-->
+            </list>
+        </property>
+    </bean>
+    <bean id="msgCodeProps" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <!--<value>classpath*:lang/acc/batchInstructionProcessing.properties</value>
+                <value>classpath*:lang/inv/commonInvoicegeneration.properties</value>-->
+            </list>
+        </property>
+    </bean>
+    <!-- <jdbc:embedded-database id="dataSource"/>-->
+</beans>

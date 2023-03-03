@@ -1,0 +1,275 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+    <display-name>Spring MVC Application</display-name>
+
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>MultipartFilter</filter-name>
+        <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>MultipartFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>encoding-filter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encoding-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+
+    <!--&lt;!&ndash;sitemesh configuration&ndash;&gt;-->
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- &lt;!&ndash;root-context configuration&ndash;&gt;-->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/config/root-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextCleanupListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+    <session-config>
+        <session-timeout>200</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/pages/common/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/pages/common/error.jsp</location>
+    </error-page>
+
+
+    <!-- SSO-->
+   <!-- <filter>
+        <filter-name>ssofilter</filter-name>
+        <filter-class>bt.gov.ditt.sso.client.SSOServletFilter</filter-class>
+        &lt;!&ndash;Checks whether there is valid session or not else redirects to SSO&ndash;&gt;
+        <init-param>
+            <param-name>CONSUMER_KEY</param-name>
+            <param-value>f9N9wRl2o052iY4UyMqf9iWt3cQa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>CONSUMER_SECRET</param-name>
+            <param-value>F4X6Xw_pPk_ctTlvTYkHg5nCvuMa</param-value>
+        </init-param>
+        <init-param>
+            <param-name>RESPONSE_URL</param-name>
+            <param-value>https://www.citizenservices.gov.bt/eKaasel/sso/acs</param-value>
+        </init-param>
+        <init-param>
+            <param-name>AUTHORIZATION_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oauth2/authorize</param-value>
+        </init-param>
+        <init-param>
+            <param-name>TOKEN_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oauth2/token</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LOGOUT_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oidc/logout</param-value>
+        </init-param>
+        <init-param>
+            <param-name>CHECK_SESSION_ENDPOINT</param-name>
+            <param-value>https://sso.dit.gov.bt/oidc/checksession</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LOGOUT_CALLBACK</param-name>
+            <param-value>https://www.citizenservices.gov.bt/eKaasel/sso/oidclogout</param-value>
+
+        </init-param>
+        <init-param>
+            <param-name>AFTER_LOGOUT_URL</param-name>
+            <param-value>https://www.citizenservices.gov.bt/</param-value>
+        </init-param>
+        &lt;!&ndash; Need to include the following for production usage&ndash;&gt;
+        <init-param>
+            <param-name>IDTOKEN_KEYSTORE</param-name>
+            <param-value>/opt/jdk1.8.0_77/jre/lib/security/cacerts</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>IDTOKEN_KEYSTORE_PASS</param-name>
+            <param-value>changeit</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>IDTOKEN_CERT_ALIAS</param-name>
+            <param-value>datahub</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ssofilter</filter-name>
+        <url-pattern>/public/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>ssofilter</filter-name>
+        <url-pattern>/sso/*</url-pattern>
+    </filter-mapping>-->
+    <!--SSO END-->
+
+
+    <!-- ######################   BEGINING OF CAS ENTRIES    ######################## -->
+    <filter>
+        <filter-name>CAS Single Sign Out Filter</filter-name>
+        <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+        <init-param>
+            <param-name>artifactParameterName</param-name>
+            <param-value>ticket</param-value>
+        </init-param>
+        <init-param>
+            <param-name>casServerUrlPrefix</param-name>
+            <param-value>https://www.citizenservices.gov.bt/cas/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>CAS Authentication Filter</filter-name>
+        <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>casServerLoginUrl</param-name>
+            <param-value>https://www.citizenservices.gov.bt/cas/login</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>http://localhost:8084/</param-value>
+            <!-- <param-value>http://172.30.3.57:8180/</param-value>-->
+            <!--<param-value>https://www.citizenservices.gov.bt/</param-value>-->
+        </init-param>
+        <init-param>
+            <param-name>Renew</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>gateway</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>artifactParameterName</param-name>
+            <param-value>ticket</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serviceParameterName</param-name>
+            <param-value>service</param-value>
+        </init-param>
+        <init-param>
+            <param-name>encodeServiceUrl</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>CAS Validation Filter</filter-name>
+        <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+        <init-param>
+            <param-name>casServerUrlPrefix</param-name>
+            <param-value>http://portalCas:9080/cas/</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serverName</param-name>
+            <param-value>http://localhost:8084/</param-value>
+            <!-- <param-value>http://172.30.3.57:8180/</param-value>-->
+            <!--<param-value>https://www.citizenservices.gov.bt/</param-value>-->
+        </init-param>
+        <init-param>
+            <param-name>allowAnyProxy</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+        <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>CAS Assertion Thread Local Filter</filter-name>
+        <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CAS Single Sign Out Filter</filter-name>
+        <url-pattern>/Logout</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CAS Authentication Filter</filter-name>
+        <url-pattern>/login/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CAS Validation Filter</filter-name>
+        <url-pattern>/login/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+        <url-pattern>/login/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CAS Assertion Thread Local Filter</filter-name>
+        <url-pattern>/login/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CAS Validation Filter</filter-name>
+        <url-pattern>/proxyCallback</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+    </listener>
+    <!-- ######################   END OF CAS ENTRIES    ######################## -->
+
+
+</web-app>

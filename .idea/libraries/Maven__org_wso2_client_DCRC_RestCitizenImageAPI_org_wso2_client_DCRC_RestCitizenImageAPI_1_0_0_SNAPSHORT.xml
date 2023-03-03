@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.wso2.client.DCRC_RestCitizenImageAPI:org.wso2.client.DCRC_RestCitizenImageAPI:1.0.0-SNAPSHORT">
+    <CLASSES>
+      <root url="jar://D:/voice_repo/repository/org/wso2/client/DCRC_RestCitizenImageAPI/org.wso2.client.DCRC_RestCitizenImageAPI/1.0.0-SNAPSHORT/org.wso2.client.DCRC_RestCitizenImageAPI-1.0.0-SNAPSHORT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/voice_repo/repository/org/wso2/client/DCRC_RestCitizenImageAPI/org.wso2.client.DCRC_RestCitizenImageAPI/1.0.0-SNAPSHORT/org.wso2.client.DCRC_RestCitizenImageAPI-1.0.0-SNAPSHORT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/voice_repo/repository/org/wso2/client/DCRC_RestCitizenImageAPI/org.wso2.client.DCRC_RestCitizenImageAPI/1.0.0-SNAPSHORT/org.wso2.client.DCRC_RestCitizenImageAPI-1.0.0-SNAPSHORT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

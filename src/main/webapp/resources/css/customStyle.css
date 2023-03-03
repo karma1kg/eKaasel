@@ -1,0 +1,78 @@
+label.required:after,
+legend.required:after {
+    content: " *";
+    color: red;
+}
+
+.error {
+    /*background-color: #FF9999;*/
+    /*background-color: #ffff00;*/
+    border: 1px solid red !important;
+}
+
+/*
+@media print {
+    table {
+        border: 1pt solid #000000;
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        font-size: 10pt;
+    }
+}*/
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+    border-bottom-width: 1px;
+}
+
+/*.menu-link {*/
+/*cursor: pointer;*/
+/*text-decoration: underline;*/
+/*}*/
+
+.menu-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.successMsg {
+    color: #5cb85c;
+}
+
+.errorMsg {
+    color: #d9534f;
+    font-size: 20px;
+}
+
+.warningMsg {
+    color: orange;
+}
+
+/* to remove page number and date when printing data table*/
+@page {
+    size: auto;
+    margin: 5mm;
+}
+.green-color{
+    color: red;
+}
+
+/*@media print {*/
+/*#Header, #Footer {*/
+/*display: none !important;*/
+/*}*/
+/*}*/
